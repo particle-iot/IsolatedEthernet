@@ -1,0 +1,17 @@
+{
+    "name": "test-server",
+    "description": "test server for IsolatedEthernet library",
+    "version": "0.0.1",
+    "private": true,
+    "license": "Apache-2.0",
+    "engines": {
+      "node": ">=12"
+    },
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+    },
+    "devDependencies": {}
+  }
+  
