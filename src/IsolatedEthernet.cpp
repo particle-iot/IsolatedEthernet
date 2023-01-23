@@ -54,7 +54,7 @@ void IsolatedEthernet::setup()
     if (pinRESET != PIN_INVALID)
     {
         pinMode(pinRESET, OUTPUT);
-        digitalWrite(pinCS, HIGH);
+        digitalWrite(pinRESET, HIGH);
     }
 
     // We manually set the CS pin, so don't do it in SPI.begin()
@@ -108,7 +108,6 @@ void IsolatedEthernet::setup()
             instance().wizchip_spi_writeburst(pBuf, len);
         });
 
-
     // This can only be done after setting callbacks
     wizchip_sw_reset();
 
@@ -122,15 +121,21 @@ void IsolatedEthernet::setup()
     }
 
     {
+        wiz_PhyConf phyConfSet = {0};
         wiz_PhyConf phyConf = {0};
 
-        phyConf.by = PHY_CONFBY_HW;
-        phyConf.mode = PHY_MODE_AUTONEGO;
+        phyConfSet.by = PHY_CONFBY_HW;
+        phyConfSet.mode = PHY_MODE_AUTONEGO;
 
-        wizphy_setphyconf(&phyConf);
+        wizphy_setphyconf(&phyConfSet);
 
         wizphy_getphyconf(&phyConf);
         appLog.trace("phyConf: by=%d mode=%d speed=%d duplex=%d", (int)phyConf.by, (int)phyConf.mode, (int)phyConf.speed, (int)phyConf.duplex);
+
+        if (phyConfSet.by != phyConf.by || phyConfSet.mode != phyConf.mode) {
+            appLog.error("phyConf did not set properly, connection to W5500 is probably not working");
+        }
+
     }
 
     {
@@ -559,12 +564,11 @@ int IsolatedEthernet::socketGetFree()
 
 void IsolatedEthernet::beginTransaction()
 {
+    spi->beginTransaction(spiSettings);
     if (pinCS != PIN_INVALID)
     {
         pinResetFast(pinCS);
-        //digitalWrite(pinCS, LOW);
     }
-    spi->beginTransaction(spiSettings);
 }
 
 void IsolatedEthernet::endTransaction()
@@ -572,7 +576,6 @@ void IsolatedEthernet::endTransaction()
     if (pinCS != PIN_INVALID)
     {
         pinSetFast(pinCS);
-        //digitalWrite(pinCS, HIGH);
     }
     spi->endTransaction();
 }

@@ -940,7 +940,11 @@ public:
      */
     IsolatedEthernet &withEthernetMikroeFeatherShield(int bus) {
         if (bus == 1) {
+#if HAL_PLATFORM_RTL872X
+            return withSPI(&SPI).withPinCS(S3).withPinINT(S4).withPinRESET(A2);
+#else   
             return withSPI(&SPI).withPinCS(A5).withPinINT(A4).withPinRESET(A2);
+#endif
         }
         else {
             return withSPI(&SPI).withPinCS(D5).withPinINT(D6).withPinRESET(D7);
