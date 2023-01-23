@@ -2,7 +2,7 @@
 
 **Particle library for WIZnet W5500 for accessing devices on isolated Ethernet LANs**
 
-- Github: https://github.com/particle-iot/IsolatedEthernet
+- Github: [https://github.com/particle-iot/IsolatedEthernet](https://github.com/particle-iot/IsolatedEthernet)
 - [Full browseable API documentation](https://particle-iot.github.io/IsolatedEthernet/class_isolated_ethernet.html)
 - Community library: IsolatedEthernet
 - License: Apache 2.0 (can use in open or closed source projects, including commercial projects, for free)
@@ -10,16 +10,16 @@
 
 Features:
 
-- Only implements TCPClient, TCPServer, UDP, and UDP multicast to Ethernet. Cloud connection uses native networking (cellular or Wi-Fi).
+- Implements TCPClient, TCPServer, UDP, and UDP multicast to Ethernet. Cloud connection uses native networking (cellular or Wi-Fi).
 - Static IP addressing or DHCP.
+- Can store static IP information in the file system. Example code to set it using a Particle.function remotely.
 - Can connect to an isolated Ethernet network. There is no IP routing between networks so the isolated network stays isolated.
 - Works with any available SPI interface and any available GPIO for SPI CS. INT and RESET are optional.
 - Uses separate TCPClient, TCPServer, and UDP classes over Ethernet so you can still use those classes with native networking at the same time.
 - Works with any WIZnet W5500 board, including Particle M.2 evaluation board, Ethernet FeatherWing, Mikroe ETH click, and Adafruit Ethernet FeatherWing.
-- Works on Gen 3 devices (Boron, B Series SoM, Argon, Tracker SoM).
+- Works on Gen 3 devices (Boron, B Series SoM, Argon, Tracker SoM, E404X).
 - Does not currently work on the P2 or Photon 2, but is expected to in the future.
 - Will not work on Gen 2 (E Series, Electron, Photon, P1) or the Tracker One (does not have SPI exposed).
-- Can store static IP information in the file system. Example code to set it using a Particle.function remotely.
 
 While the WIZnet W5500 works on isolated networks, and with static IP addressing, it may not completely work in situations where there is no router or gateway on the Ethernet LAN at all. The W5500 is able to send UDP and UDP multicast in this scenario, but other hosts may not be able to send data to it, thus making it impossible to receive data or use TCP connections (client or server). Note that a gateway does not have to connect to any other network, it just needs to be there as the default to route between hosts on the same LAN. This may be dependent on what the other side of the connection is, as well.
 
