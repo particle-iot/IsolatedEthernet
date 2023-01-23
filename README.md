@@ -4,6 +4,7 @@
 
 - Github: https://github.com/particle-iot/IsolatedEthernet
 - [Full browseable API documentation](https://particle-iot.github.io/IsolatedEthernet/class_isolated_ethernet.html)
+- Community library: IsolatedEthernet
 - License: Apache 2.0 (can use in open or closed source projects, including commercial projects, for free)
 
 
@@ -207,6 +208,12 @@ SerialLogHandler logHandler(LOG_LEVEL_INFO, { // Logging level default
 
 - [WIZnet W5500 documentation](https://www.wiznet.io/product-item/w5500/)
 - [WIZnet ioLibrary driver](https://github.com/Wiznet/ioLibrary_Driver)
+
+## Release history
+
+### 0.0.1 (2023-01-23)
+
+- Initial version
 
 
 ## License
